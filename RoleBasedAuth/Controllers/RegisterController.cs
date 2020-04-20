@@ -10,9 +10,11 @@ namespace RoleBasedAuth.Controllers {
 
 	public class RegisterController : Controller {
 		private readonly UserManager<IdentityUser> userManager;
+		private readonly RoleManager<IdentityRole> roleManager;
 
-		public RegisterController(UserManager<IdentityUser> userManager) {
+		public RegisterController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager) {
 			this.userManager = userManager;
+			this.roleManager = roleManager;
 		}
 
 		[HttpGet]
@@ -30,7 +32,18 @@ namespace RoleBasedAuth.Controllers {
 
 				var createdUser = await userManager.CreateAsync(newUser);
 				if (createdUser.Succeeded) {
+					//User created successfully!
 					Console.WriteLine($"CREATED USER! username: {newUser.UserName}, password: {newUser.PasswordHash}");
+
+					//Check if role exists
+					if (!await roleManager.RoleExistsAsync("myRole")) {
+						var role = new IdentityRole();
+						role.Name = "myRole";
+						await roleManager.CreateAsync(role);
+					}
+
+					//Add user to role
+					createdUser = await userManager.AddToRoleAsync(newUser, "myRole");
 				} else {
 					ModelState.AddModelError("All", createdUser.ToString());
 				}
