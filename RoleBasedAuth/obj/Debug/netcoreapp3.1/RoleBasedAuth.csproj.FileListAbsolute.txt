@@ -148,3 +148,4 @@ C:\Users\stian\source\repos\Authentication\RoleBasedAuth\bin\Debug\netcoreapp3.1
 C:\Users\stian\source\repos\Authentication\RoleBasedAuth\obj\Debug\netcoreapp3.1\RoleBasedAuth.csproj.CoreCompileInputs.cache
 C:\Users\stian\source\repos\Authentication\RoleBasedAuth\obj\Debug\netcoreapp3.1\RoleBasedAuth.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\stian\source\repos\Authentication\RoleBasedAuth\obj\Debug\netcoreapp3.1\RoleBasedAuth.csprojAssemblyReference.cache
+C:\Users\stian\source\repos\Authentication\RoleBasedAuth\obj\Debug\netcoreapp3.1\Razor\Views\Permission\permission.cshtml.g.cs

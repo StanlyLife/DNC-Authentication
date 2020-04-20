@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> userManager
+@inject SignInManager<IdentityUser> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -33,9 +37,16 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="logout">Logout</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Permission" asp-action="permission">Permissions</a>
-						</li>
+						@if (User.Identity.IsAuthenticated) {
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Permission" asp-action="permission">Permissions</a>
+							</li>
+							if (User.IsInRole("myRole")) {
+								<li class="nav-item">
+									<a class="nav-link text-dark">myRole</a>
+								</li>
+							}
+						}
 					</ul>
 				</div>
 			</div>

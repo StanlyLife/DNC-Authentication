@@ -28,22 +28,18 @@ namespace RoleBasedAuth.Controllers {
 				var newUser = new IdentityUser();
 
 				newUser.UserName = model.username;
-				newUser.PasswordHash = model.password;
+				/*creating passwords this way creates unhashed passwords*/
+				/*If you want to hash your own passwords, you can do it here*/
+				/*If you want to use built in hash you have to pass password as a parameter in create async*/
+				//newUser.PasswordHash = model.password;
 
-				var createdUser = await userManager.CreateAsync(newUser);
+				var createdUser = await userManager.CreateAsync(newUser, model.password);
 				if (createdUser.Succeeded) {
 					//User created successfully!
 					Console.WriteLine($"CREATED USER! username: {newUser.UserName}, password: {newUser.PasswordHash}");
 
-					//Check if role exists
-					if (!await roleManager.RoleExistsAsync("myRole")) {
-						var role = new IdentityRole();
-						role.Name = "myRole";
-						await roleManager.CreateAsync(role);
-					}
-
 					//Add user to role
-					createdUser = await userManager.AddToRoleAsync(newUser, "myRole");
+					await AddUserToRole(newUser, createdUser);
 				} else {
 					ModelState.AddModelError("All", createdUser.ToString());
 				}
@@ -54,6 +50,19 @@ namespace RoleBasedAuth.Controllers {
 				}
 			}
 			return View(model);
+		}
+
+		private async Task<IdentityResult> AddUserToRole(IdentityUser newUser, IdentityResult createdUser) {
+			//Check if role exists
+			if (!await roleManager.RoleExistsAsync("myRole")) {
+				var role = new IdentityRole();
+				role.Name = "myRole";
+				await roleManager.CreateAsync(role);
+			}
+
+			//Add user to role
+			createdUser = await userManager.AddToRoleAsync(newUser, "myRole");
+			return createdUser;
 		}
 	}
 }
