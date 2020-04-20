@@ -1,0 +1,25 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model UserModel
+@{
+	ViewData["Title"] = "Login";
+}
+<link rel="stylesheet" href="~/css/master.css" />
+
+<div class="header">
+	<h1>Login</h1>
+</div>
+
+<div class="form-wrapper">
+	<form method="post">
+		<div class="text-danger" asp-validation-summary="All"></div>
+		<div class="form-row">
+			<label>username</label>
+			<input type="text" asp-for="username" />
+		</div>
+		<div class="form-row">
+			<label>password</label>
+			<input type="text" asp-for="password" />
+		</div>
+		<button type="submit">login</button>
+	</form>
+</div>

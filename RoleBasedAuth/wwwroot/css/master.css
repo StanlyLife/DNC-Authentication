@@ -1,0 +1,33 @@
+﻿body {
+}
+
+.header {
+	width: 50%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+	.header h1 {
+		color: indianred;
+		text-align: center;
+		text-transform: uppercase;
+		font-family: Arial;
+	}
+
+.form-wrapper {
+	width: 75vw;
+	margin: 0 auto;
+	background: snow;
+}
+
+	.form-wrapper input {
+		width: 30%;
+	}
+
+.form-row {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}

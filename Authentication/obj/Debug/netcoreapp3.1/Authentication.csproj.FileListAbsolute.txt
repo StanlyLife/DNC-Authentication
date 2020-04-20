@@ -86,8 +86,6 @@ C:\Users\stian\source\repos\Authentication\Authentication\bin\Debug\netcoreapp3.
 C:\Users\stian\source\repos\Authentication\Authentication\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\stian\source\repos\Authentication\Authentication\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\stian\source\repos\Authentication\Authentication\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.csproj.CoreCompileInputs.cache
-C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.csproj.CopyComplete
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.dll
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.pdb
@@ -104,3 +102,5 @@ C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Razor\Views\Home\Secret.cshtml.g.cs
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.RazorTargetAssemblyInfo.cs
 C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.Views.pdb
+C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.csproj.CoreCompileInputs.cache
+C:\Users\stian\source\repos\Authentication\Authentication\obj\Debug\netcoreapp3.1\Authentication.MvcApplicationPartsAssemblyInfo.cache
