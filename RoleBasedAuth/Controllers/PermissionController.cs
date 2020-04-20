@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RoleBasedAuth.Data;
 using RoleBasedAuth.Models;
 
@@ -14,15 +15,34 @@ namespace RoleBasedAuth.Controllers {
 	public class PermissionController : Controller {
 		private readonly UserManager<IdentityUser> userManager;
 		private readonly RoleManager<IdentityRole> roleManager;
+		private readonly SignInManager<IdentityUser> signInManager;
+		private readonly ApplicationUserDbContext context;
 
-		public PermissionController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager) {
+		public PermissionController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ApplicationUserDbContext context) {
 			this.userManager = userManager;
 			this.roleManager = roleManager;
+			this.signInManager = signInManager;
+			this.context = context;
 		}
 
 		[HttpGet]
-		public IActionResult permission() {
-			return View();
+		public async Task<IActionResult> permissionAsync() {
+			PermissionModel model = new PermissionModel();
+			var userList = await context.Users.ToListAsync();
+			model.userList = userList;
+			List<List<string>> userRoles = new List<List<string>>();
+			foreach (var u in userList) {
+				List<string> roles = new List<string>();
+				//add list A to userroles
+				foreach (var role in roleManager.Roles.ToList()) {
+					if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(u.UserName), role.ToString())) {
+						roles.Add(role.ToString());
+					}
+				}
+				userRoles.Add(roles);
+			}
+			model.rolesList = userRoles;
+			return View(model);
 		}
 
 		public IActionResult ButtonClick() {
@@ -31,6 +51,7 @@ namespace RoleBasedAuth.Controllers {
 
 		public async Task<IActionResult> getClaimsAsync() {
 			var loggedInUser = await userManager.GetUserAsync(User);
+
 			int i = 1;
 
 			foreach (var claims in User.Claims) {
@@ -97,12 +118,17 @@ namespace RoleBasedAuth.Controllers {
 				}
 				if (!roleExists) { /*IF NOT EXISTS Create role*/
 					var result = await CreateOneRoleAsync(model.role);
-					roleToAppendUser = result.ToString();
+					if (result.Succeeded) {
+						roleToAppendUser = model.role;
+					} else {
+						return RedirectToAction("index", "home");
+					}
 				}
 
 				/*Add User to role*/
 				Console.WriteLine($"Added user to role {roleToAppendUser}");
 				await userManager.AddToRoleAsync(userToAppendRole, roleToAppendUser);
+				await signInManager.RefreshSignInAsync(userToAppendRole);
 			} else {
 				/*If user is already in role, return error*/
 				Console.WriteLine("user is already in role");

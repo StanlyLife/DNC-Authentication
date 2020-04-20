@@ -1,5 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @model PermissionModel
+
 @{
 	ViewData["Title"] = "permission";
 }
@@ -41,3 +43,18 @@
 		Add to role
 	</button>
 </form>
+
+<table>
+	@{Model.counter = 0;}
+	@foreach (var u in Model.userList) {
+
+		<tr>
+			<td>@u.UserName</td>
+			@foreach (var r in Model.rolesList.ToList()[Model.counter]) {
+				<td>@r</td>
+			}
+			@{Model.counter++; }
+		</tr>
+
+	}
+</table>
