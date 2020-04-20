@@ -1,0 +1,100 @@
+﻿body {
+}
+
+
+
+main h1 {
+	text-align: center;
+	text-transform: uppercase;
+	color: indianred;
+	font-family: arial;
+	font-weight: bolder;
+}
+
+form {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	margin-top: 2.5vh;
+}
+
+	form button {
+		font-weight: bolder;
+		border: none;
+		background: #555;
+		color: white;
+		text-transform: uppercase;
+		padding: 1rem;
+		transition: all .25s ease-in-out;
+		border-bottom: 5px solid orange;
+	}
+
+		form button:hover {
+			background: indianred;
+			color: #333;
+			border-bottom: 5px solid #333;
+		}
+
+	form input {
+		border: none;
+		background: wheat;
+		border-bottom: 2px solid orange;
+		color: #333;
+		text-align: center;
+	}
+
+	form label {
+		margin: 2.5vh 0 0 0;
+		background: #999;
+		color: #555;
+		font-weight: bolder;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex: 1;
+		padding: .5rem;
+	}
+
+
+.form-row {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+	.form-row input {
+		height: 100%;
+		flex: 1;
+	}
+
+	.form-row button {
+		flex: 1;
+	}
+
+
+table {
+	margin: 5vh auto;
+}
+
+	table tr {
+		display: flex;
+	}
+
+		table tr td {
+			padding: 1rem;
+			border-bottom: 2px solid #333;
+			flex: 1;
+		}
+
+td.username {
+	border-bottom: 2px solid orange;
+	font-weight: bolder;
+}
+
+.box {
+	border: 5px solid #8f8f8f;
+	width: 50%;
+	margin: 1vh auto;
+	padding: 1rem;
+}

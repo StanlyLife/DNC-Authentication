@@ -5,31 +5,44 @@
 @{
 	ViewData["Title"] = "permission";
 }
-
+<link rel="stylesheet" href="~/css/permissions.css" />
 <h1>permissions</h1>
+<div class="box">
 <div class="text-danger" asp-validation-summary="All"></div>
+</div>
+
+<div class="box">
+
 <form method="post" asp-action="getAllRoles">
 	<button type="submit" OnClientClick="return false;">
 		Get All Roles
 	</button>
 </form>
+</div>
+<div class="box">
+
 <form method="post" asp-action="getUserRoles">
 	<button type="submit" OnClientClick="return false;">
 		Get User Roles
 	</button>
 </form>
+</div>
+<div class="box">
 <form method="post" asp-action="getClaims">
 	<button type="submit" OnClientClick="return false;">
 		Get User Claims
 	</button>
 </form>
-
+</div>
+<div class="box">
 <form method="post" asp-action="CreateRoles">
 	<input type="text" value="" asp-for="role" />
 	<button type="submit" OnClientClick="return false;">
 		Create Role
 	</button>
 </form>
+</div>
+<div class="box">
 <form method="post" asp-action="AddUserToRole">
 	<div class="form-row">
 		<label>user</label>
@@ -43,13 +56,14 @@
 		Add to role
 	</button>
 </form>
+</div>
 
 <table>
 	@{Model.counter = 0;}
 	@foreach (var u in Model.userList) {
 
 		<tr>
-			<td>@u.UserName</td>
+			<td class="username">@u.UserName</td>
 			@foreach (var r in Model.rolesList.ToList()[Model.counter]) {
 				<td>@r</td>
 			}

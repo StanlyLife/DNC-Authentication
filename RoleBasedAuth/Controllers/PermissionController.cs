@@ -31,6 +31,7 @@ namespace RoleBasedAuth.Controllers {
 			var userList = await context.Users.ToListAsync();
 			model.userList = userList;
 			List<List<string>> userRoles = new List<List<string>>();
+			//Big o what?
 			foreach (var u in userList) {
 				List<string> roles = new List<string>();
 				//add list A to userroles
