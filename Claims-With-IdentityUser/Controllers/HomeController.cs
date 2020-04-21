@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Claims_With_IdentityUser.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Claims_With_IdentityUser.Controllers {
 
 	public class HomeController : Controller {
 		private readonly ILogger<HomeController> _logger;
+		private readonly UserManager<IdentityUser> userManager;
 
-		public HomeController(ILogger<HomeController> logger) {
+		public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager) {
 			_logger = logger;
+			this.userManager = userManager;
 		}
 
-		public IActionResult Index() {
+		public async Task<IActionResult> IndexAsync() {
 			ContainerModel model = new ContainerModel();
+
+			if (User.Identity.IsAuthenticated) {
+				model.user = await userManager.GetUserAsync(User);
+			}
+
 			return View(model);
 		}
 

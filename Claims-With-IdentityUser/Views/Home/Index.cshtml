@@ -6,35 +6,38 @@
 <div class="header">
 	<h1>Welcome</h1>
 	<h2>@Model.user.UserName</h2>
+	@if (TempData["Message"] != null) {
+		<h5>@TempData["Message"]</h5>
+	}
 </div>
 <hr />
 
 <div class="log-reg">
 
-	<form asp-action="" method="post">
+	<form asp-controller="login" asp-action="index" method="post">
 		<h4>login</h4>
 
 		<div class="label-input">
 			<label>name</label>
-			<input type="text" value="" />
+			<input asp-for="Lrm.username" type="text" value="" />
 		</div>
 		<div class="label-input">
 			<label>password</label>
-			<input type="text" value="" />
+			<input asp-for="Lrm.password" type="text" value="" />
 		</div>
-		<button>Login</button>
+		<button OnClientClick="return false;">Login</button>
 	</form>
-	<form asp-action="" method="post">
+	<form asp-controller="register" asp-action="index" method="post">
 		<h4>register</h4>
 		<div class="label-input">
 			<label>name</label>
-			<input type="text" value="" />
+			<input asp-for="Lrm.username" type="text" value="" />
 		</div>
 		<div class="label-input">
 			<label>password</label>
-			<input type="text" value="" />
+			<input asp-for="Lrm.password" type="text" value="" />
 		</div>
-		<button>Register</button>
+		<button OnClientClick="return false;">Register</button>
 	</form>
 </div>
 
