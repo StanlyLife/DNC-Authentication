@@ -73,6 +73,8 @@ namespace RoleBasedAuth {
 				//	PolicyBuilder.RequireClaim(ClaimTypes.DateOfBirth);
 				//});
 
+				config.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+
 				config.AddPolicy("Claim.DoB", PolicyBuilder => {
 					PolicyBuilder.RequireCustomClaim(ClaimTypes.DateOfBirth);
 				});
