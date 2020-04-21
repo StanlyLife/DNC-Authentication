@@ -24,5 +24,8 @@ namespace RoleBasedAuth.Models {
 
 		[IgnoreDataMember]
 		public int counter { get; set; }
+
+		[IgnoreDataMember]
+		public string loggedInUser { get; set; }
 	}
 }

@@ -28,6 +28,7 @@ namespace RoleBasedAuth.Controllers {
 		[HttpGet]
 		public async Task<IActionResult> permissionAsync() {
 			PermissionModel model = new PermissionModel();
+			model.loggedInUser = User.Identity.Name;
 			var userList = await context.Users.ToListAsync();
 			model.userList = userList;
 			List<List<string>> userRoles = new List<List<string>>();
@@ -107,7 +108,7 @@ namespace RoleBasedAuth.Controllers {
 
 		public async Task<IActionResult> AddUserToRoleAsync(PermissionModel model) {
 			var userToAppendRole = await userManager.FindByNameAsync(model.user);
-			if (!User.IsInRole(model.role.ToString())) { /*CHECK IF User is in role*/
+			if (!await userManager.IsInRoleAsync(userToAppendRole, model.role.ToString())) { /*CHECK IF User is in role*/
 				var roles = roleManager.Roles.ToList();
 				bool roleExists = false;
 				string roleToAppendUser = model.role;

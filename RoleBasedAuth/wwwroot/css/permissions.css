@@ -1,15 +1,18 @@
 ﻿body {
 }
 
-
-
-main h1 {
-	text-align: center;
-	text-transform: uppercase;
-	color: indianred;
-	font-family: arial;
-	font-weight: bolder;
+main {
+	display: flex;
+	flex-wrap: wrap;
 }
+
+	main h1 {
+		text-align: center;
+		text-transform: uppercase;
+		color: indianred;
+		font-family: arial;
+		font-weight: bolder;
+	}
 
 form {
 	width: 100%;
