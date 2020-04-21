@@ -1,0 +1,141 @@
+﻿h1, h2 {
+	text-align: center;
+	color: #555;
+}
+
+h2 {
+	color: indianred;
+}
+
+button, input {
+	background: honeydew;
+	border: none;
+	transition: all .2s ease-in-out;
+}
+
+label {
+	margin: 0;
+	font-weight: bolder;
+}
+
+button {
+	color: #fff;
+	background: #555;
+	border-bottom: 2px solid indianred;
+	padding: .5rem 1rem;
+}
+
+	button:hover {
+		color: #fff;
+		background: indianred;
+		border-bottom: 2px solid #333;
+	}
+
+.log-reg {
+	border-bottom: 2px solid indianred;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	margin: 2vh 0;
+}
+
+	.log-reg form {
+		flex: 1;
+		margin: 1rem;
+	}
+
+	.log-reg .label-input {
+		width: 100%;
+		margin: 1rem auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+
+		.log-reg .label-input input {
+			border-bottom: 2px solid indianred;
+			margin: 0 5px;
+			flex: 2;
+			padding: .5rem;
+		}
+
+		.log-reg .label-input label {
+			flex: 1;
+			margin: 0;
+			padding: .5rem;
+		}
+
+	.log-reg form button {
+		width: 65%;
+		margin: 0 5px;
+		float: right;
+	}
+
+
+
+
+.add-claims, .remove-claims {
+	border: 2px solid #555;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+	width: 50vw;
+	margin: 1rem auto;
+}
+
+	.add-claims form, .remove-claims form {
+		margin: 1rem;
+	}
+
+		.add-claims form button, .remove-claims form button {
+			width: 100%;
+		}
+
+
+
+	.add-claims .label-input, .remove-claims .label-input {
+		display: flex;
+		justify-content: center;
+		margin: 1rem .5rem;
+	}
+
+		.add-claims .label-input label, .remove-claims .label-input label {
+			flex: 1;
+			padding: .25rem;
+		}
+
+		.add-claims .label-input input, .remove-claims .label-input input {
+			border-bottom: 2px solid indianred;
+			flex: 2;
+		}
+
+/*table*/
+.users-claims {
+	text-align: center;
+	margin: 1rem;
+}
+
+table {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+tr {
+	display: flex;
+	margin: 1vh 0;
+	width: 100%;
+}
+
+td.username {
+	border-bottom: 2px solid indianred;
+	flex: 2;
+}
+
+td {
+	flex: 1;
+	margin: 0 5px;
+	border-bottom: 2px solid lime;
+}

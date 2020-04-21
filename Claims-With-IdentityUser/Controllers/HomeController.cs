@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Claims_With_IdentityUser.Models;
 
 namespace Claims_With_IdentityUser.Controllers {
+
 	public class HomeController : Controller {
 		private readonly ILogger<HomeController> _logger;
 
@@ -16,10 +17,6 @@ namespace Claims_With_IdentityUser.Controllers {
 		}
 
 		public IActionResult Index() {
-			return View();
-		}
-
-		public IActionResult Privacy() {
 			return View();
 		}
 
