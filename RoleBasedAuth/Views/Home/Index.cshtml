@@ -1,8 +1,64 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="header">
+	<h1>Welcome</h1>
+	<h2>username</h2>
+</div>
+<hr />
+
+<div class="log-reg">
+
+	<form asp-action="" method="post">
+		<div class="label-input-button"></div>
+		<label>Login</label>
+		<input type="text" value="" />
+		<button>Login</button>
+	</form>
+	<form asp-action="" method="post">
+		<div class="label-input-button">
+			<label>Register</label>
+			<input type="text" value="" />
+			<button>Register</button>
+		</div>
+	</form>
+</div>
+
+<div class="add-claims">
+	<form asp-action="" method="post">
+		<div class="label-input">
+			<label>Username</label>
+			<input type="text" value="" />
+		</div>
+		<div class="label-input">
+			<label>Claim-name/type</label>
+			<input type="text" value="" />
+		</div>
+	</form>
+</div>
+
+<div class="remove-claims">
+	<form asp-action="" method="post">
+		<div class="label-input">
+			<label>Username</label>
+			<input type="text" value="" />
+		</div>
+		<div class="label-input">
+			<label>Claim-name/type</label>
+			<input type="text" value="" />
+		</div>
+	</form>
+</div>
+
+<div class="users-claims">
+	<table>
+		<tr>username</tr>
+		<td>foreach claims</td>
+	</table>
 </div>
