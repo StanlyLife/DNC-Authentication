@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -143,6 +144,31 @@ namespace RoleBasedAuth.Controllers {
 			var role = new IdentityRole();
 			role.Name = roleName;
 			return await roleManager.CreateAsync(role);
+		}
+
+		public async Task<IActionResult> setClaimsAsync() {
+			ClaimsIdentity currentIdentity = new ClaimsIdentity(User.Identity);
+			IdentityUser userManagerIdentity = await userManager.FindByNameAsync(User.Identity.Name);
+
+			//Remove and set new claim
+			if (currentIdentity.FindFirst(ClaimTypes.DateOfBirth) != null)
+				await userManager.RemoveClaimAsync(userManagerIdentity, currentIdentity.FindFirst(ClaimTypes.DateOfBirth));
+			await userManager.AddClaimAsync(userManagerIdentity, new Claim(ClaimTypes.DateOfBirth, "16/11/1997"));
+
+			await signInManager.RefreshSignInAsync(userManagerIdentity);
+
+			return RedirectToAction("permission");
+		}
+
+		public async Task<IActionResult> relogAsync() {
+			var user = await userManager.FindByNameAsync(User.Identity.Name);
+			await signInManager.RefreshSignInAsync(user);
+			return RedirectToAction("permission");
+		}
+
+		public async Task<IActionResult> signOutAsync() {
+			await signInManager.SignOutAsync();
+			return RedirectToAction("permission");
 		}
 	}
 }

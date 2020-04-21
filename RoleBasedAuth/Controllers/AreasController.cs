@@ -17,5 +17,10 @@ namespace RoleBasedAuth.Controllers {
 		public IActionResult AdminPage() {
 			return View();
 		}
+
+		[Authorize(Policy = "Claim.DoB")]
+		public IActionResult DoBPage() {
+			return View();
+		}
 	}
 }

@@ -12,14 +12,31 @@
 
 <div class="box">
 
+	<form method="post" asp-action="relog">
+		<button type="submit" OnClientClick="return false;">
+			Refresh login
+		</button>
+	</form>
+</div>
+<div class="box">
+
+	<form method="post" asp-action="signOut">
+		<button type="submit" OnClientClick="return false;">
+			signOut
+		</button>
+	</form>
+</div>
+
+<div class="box">
+
 	<form method="post" asp-action="getAllRoles">
 		<button type="submit" OnClientClick="return false;">
 			Get All Roles
 		</button>
 	</form>
 </div>
-<div class="box">
 
+<div class="box">
 	<form method="post" asp-action="getUserRoles">
 		<button type="submit" OnClientClick="return false;">
 			Get User Roles
@@ -30,6 +47,13 @@
 	<form method="post" asp-action="getClaims">
 		<button type="submit" OnClientClick="return false;">
 			Get User Claims
+		</button>
+	</form>
+</div>
+<div class="box">
+	<form method="post" asp-action="setClaims">
+		<button type="submit" OnClientClick="return false;">
+			Set User Claims
 		</button>
 	</form>
 </div>
