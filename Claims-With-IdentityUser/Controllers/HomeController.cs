@@ -17,8 +17,11 @@ namespace Claims_With_IdentityUser.Controllers {
 		}
 
 		public IActionResult Index() {
-			return View();
+			ContainerModel model = new ContainerModel();
+			return View(model);
 		}
+
+		#region NotAuthenticated
 
 		public IActionResult loginRequired() {
 			return View();
@@ -28,9 +31,15 @@ namespace Claims_With_IdentityUser.Controllers {
 			return View();
 		}
 
+		#endregion NotAuthenticated
+
+		#region errorView
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error() {
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
+
+		#endregion errorView
 	}
 }

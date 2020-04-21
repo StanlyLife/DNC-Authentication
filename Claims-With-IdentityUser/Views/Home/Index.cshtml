@@ -1,10 +1,11 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
 }
+@model ContainerModel
 <link href="~/css/home.css" rel="stylesheet" />
 <div class="header">
 	<h1>Welcome</h1>
-	<h2>username</h2>
+	<h2>@Model.user.UserName</h2>
 </div>
 <hr />
 
