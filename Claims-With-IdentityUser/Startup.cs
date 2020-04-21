@@ -40,7 +40,7 @@ namespace Claims_With_IdentityUser {
 			services.ConfigureApplicationCookie(options => {
 				options.Cookie.Name = "my websites cookie";
 				options.AccessDeniedPath = "/home/denied";
-				options.LoginPath = "/home/login";
+				options.LoginPath = "/home/loginRequired";
 			});
 			services.AddAuthentication(options => {
 			}).AddCookie("My Authentication schema", options => {
