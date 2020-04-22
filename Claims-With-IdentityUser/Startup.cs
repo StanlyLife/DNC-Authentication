@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Claims_With_IdentityUser.Authorization;
 using Claims_With_IdentityUser.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static Claims_With_IdentityUser.Authorization.MyPolicyRequirements;
 
 namespace Claims_With_IdentityUser {
 
@@ -68,7 +71,7 @@ namespace Claims_With_IdentityUser {
 				});
 
 				options.AddPolicy("myWebsiteAgePolicy", MyPolicyBuilder => {
-					MyPolicyBuilder.RequireClaim("age", "21");
+					MyPolicyBuilder.Requirements.Add(new MyPolicyRequirements.MinimumAgeRequirement(21));
 				});
 			});
 
@@ -80,7 +83,7 @@ namespace Claims_With_IdentityUser {
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 			/**/
-
+			services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 			services.AddControllersWithViews();
 		}
 
