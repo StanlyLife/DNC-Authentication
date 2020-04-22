@@ -4,8 +4,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Claims_With_IdentityUser.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,15 +40,26 @@ namespace Claims_With_IdentityUser {
 			}).AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
 
+			//services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+			//	.AddCookie(options => {
+			//		options.Cookie.IsEssential = true;
+			//		options.Cookie.HttpOnly = true;
+			//		options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+			//		options.Cookie.SameSite = SameSiteMode.None;
+			//		options.Cookie.Name = "my.authentication.cookie";
+			//		options.AccessDeniedPath = "/home/authenticationdenied";
+			//	});
+
+			services.AddAuthentication("myCookieAuthentication").AddCookie("myCookieAuthentication", config => {
+				config.Cookie.Name = "Life.Cookie";
+				config.LoginPath = "/Login/login"; /*unauthorized login*/
+			});
+
 			services.ConfigureApplicationCookie(options => {
-				options.Cookie.Name = "my websites cookie";
+				options.Cookie.Name = "myWebsitesCookie";
 				options.AccessDeniedPath = "/home/denied";
 				options.LoginPath = "/home/loginRequired";
-			});
-			services.AddAuthentication(options => {
-			}).AddCookie("My Authentication schema", options => {
-				options.Cookie.Name = "my authentication cookie";
-				options.AccessDeniedPath = "/home/authenticationdenied";
+				options.Cookie.Domain = "www.localhost.com";
 			});
 
 			services.AddAuthorization(options => {
@@ -58,6 +71,15 @@ namespace Claims_With_IdentityUser {
 					MyPolicyBuilder.RequireClaim("Age", "21");
 				});
 			});
+
+			/**/
+			services.Configure<CookiePolicyOptions>(options => {
+				options.ConsentCookie.IsEssential = true;
+				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
+				options.CheckConsentNeeded = context => false;
+				options.MinimumSameSitePolicy = SameSiteMode.None;
+			});
+			/**/
 
 			services.AddControllersWithViews();
 		}

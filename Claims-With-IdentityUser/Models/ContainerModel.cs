@@ -11,10 +11,6 @@ namespace Claims_With_IdentityUser.Models {
 
 		public ContainerModel() {
 			counter = 0;
-			if (user == null) {
-				user = new IdentityUser();
-				user.UserName = "not logged in";
-			}
 		}
 
 		[NotMapped]
@@ -25,8 +21,5 @@ namespace Claims_With_IdentityUser.Models {
 
 		[NotMapped]
 		public int counter { get; set; }
-
-		[NotMapped]
-		public IdentityUser user { get; set; }
 	}
 }

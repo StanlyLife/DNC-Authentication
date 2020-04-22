@@ -2,10 +2,15 @@
 	ViewData["Title"] = "Home Page";
 }
 @model ContainerModel
+
 <link href="~/css/home.css" rel="stylesheet" />
 <div class="header">
 	<h1>Welcome</h1>
-	<h2>@Model.user.UserName</h2>
+	@if (User.Identity.IsAuthenticated) {
+		<h2>@User.Identity.Name</h2>
+	} else {
+		<h2>Not logged in!</h2>
+	}
 	@if (TempData["Message"] != null) {
 		<h5>@TempData["Message"]</h5>
 	}
@@ -14,7 +19,7 @@
 
 <div class="log-reg">
 
-	<form asp-controller="login" asp-action="index" method="post">
+	<form asp-action="Login" method="post">
 		<h4>login</h4>
 
 		<div class="label-input">
@@ -25,7 +30,7 @@
 			<label>password</label>
 			<input asp-for="Lrm.password" type="text" value="" />
 		</div>
-		<button OnClientClick="return false;">Login</button>
+		<button>Login</button>
 	</form>
 	<form asp-controller="register" asp-action="index" method="post">
 		<h4>register</h4>
