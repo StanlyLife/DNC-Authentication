@@ -33,6 +33,10 @@ namespace Claims_With_IdentityUser {
 
 			//Add identity
 			services.AddIdentity<IdentityUser, IdentityRole>(options => {
+				options.SignIn.RequireConfirmedAccount = false;
+				options.SignIn.RequireConfirmedEmail = false;
+				options.SignIn.RequireConfirmedPhoneNumber = false;
+
 				options.Password.RequireDigit = false;
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequiredUniqueChars = 1;
@@ -40,6 +44,11 @@ namespace Claims_With_IdentityUser {
 			}).AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
 
+			services.ConfigureApplicationCookie(options => {
+				options.Cookie.Name = "My.Custom.Identity.Cookie";
+				options.AccessDeniedPath = "/home/denied";
+				options.LoginPath = "/home/loginRequired";
+			});
 			//services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 			//	.AddCookie(options => {
 			//		options.Cookie.IsEssential = true;
@@ -53,13 +62,6 @@ namespace Claims_With_IdentityUser {
 			services.AddAuthentication("myCookieAuthentication").AddCookie("myCookieAuthentication", config => {
 				config.Cookie.Name = "Life.Cookie";
 				config.LoginPath = "/Login/login"; /*unauthorized login*/
-			});
-
-			services.ConfigureApplicationCookie(options => {
-				options.Cookie.Name = "myWebsitesCookie";
-				options.AccessDeniedPath = "/home/denied";
-				options.LoginPath = "/home/loginRequired";
-				options.Cookie.Domain = "www.localhost.com";
 			});
 
 			services.AddAuthorization(options => {

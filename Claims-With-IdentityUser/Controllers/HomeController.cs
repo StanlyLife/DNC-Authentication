@@ -51,6 +51,20 @@ namespace Claims_With_IdentityUser.Controllers {
 				}
 
 				var result = await signInManager.PasswordSignInAsync(user, model.Lrm.password, true, false);
+
+				/*-------------------------------*/
+				if (User.Identity.IsAuthenticated) {
+					Console.WriteLine("is logged in");
+				} else {
+					Console.WriteLine("is not logged in");
+				}
+
+				foreach (var c in HttpContext.User.Claims) {
+					Console.WriteLine($"Claim: {c}");
+				}
+
+				/*-------------------*/
+
 				Console.WriteLine(result.Succeeded);
 				if (result.Succeeded) {
 					TempData["message"] = "login successfull";

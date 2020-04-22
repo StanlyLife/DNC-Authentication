@@ -24,6 +24,8 @@ namespace Claims_With_IdentityUser.Controllers {
 					return RedirectToAction("index", "home");
 				}
 				IdentityUser newUser = new IdentityUser(model.Lrm.username);
+				newUser.UserName = model.Lrm.username;
+				newUser.EmailConfirmed = true;
 				await userManager.CreateAsync(newUser, model.Lrm.password);
 
 				TempData["Message"] = $"User created! {model.Lrm.username}";
