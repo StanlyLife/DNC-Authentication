@@ -29,18 +29,20 @@ namespace Claims_With_IdentityUser.Controllers {
 			IdentityUser user = await userManager.FindByNameAsync(model.username);
 			var claimToAdd = new Claim(model.claimName, model.claimValue);
 			var userClaims = userManager.GetClaimsAsync(user).Result;
+			Claim claimToRemove = null;
 			bool hasClaim = false;
 			foreach (var uc in userClaims) {
 				if (uc.Type == claimToAdd.Type) {
 					hasClaim = true;
 					Console.WriteLine(uc);
+					claimToRemove = uc; //Cannot have two claims with different values now
 				} else {
 					Console.WriteLine($"claim: [({uc.Type}),({uc.Value})] != userClaim[({claimToAdd.Type}),({claimToAdd.Value})]");
 				}
 			}
 
 			if (hasClaim) {
-				await userManager.RemoveClaimAsync(user, new Claim(model.claimName, model.claimValue));
+				await userManager.RemoveClaimAsync(user, claimToRemove);
 				TempData["Message"] = "Claim Removed!";
 				Console.WriteLine("Claim Removed!");
 				return true;
