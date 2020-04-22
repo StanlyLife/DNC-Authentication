@@ -11,14 +11,18 @@ namespace Claims_With_IdentityUser.Controllers {
 
 	public class PermissionsController : Controller {
 		private readonly UserManager<IdentityUser> userManager;
+		private readonly SignInManager<IdentityUser> signinManage;
 
-		public PermissionsController(UserManager<IdentityUser> userManager) {
+		public PermissionsController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManage) {
 			this.userManager = userManager;
+			this.signinManage = signinManage;
 		}
 
 		public async Task<IActionResult> RemoveClaimAsync(ContainerModel model) {
 			if (User.Identity.IsAuthenticated) {
-				await ClaimRemoval(model);
+				var result = await ClaimRemoval(model);
+				if (result)
+					await signinManage.RefreshSignInAsync(await userManager.FindByNameAsync(model.username));
 			} else {
 				TempData["Message"] = "You need to be signed in to remove claims";
 			}
@@ -34,8 +38,11 @@ namespace Claims_With_IdentityUser.Controllers {
 			foreach (var uc in userClaims) {
 				if (uc.Type == claimToAdd.Type) {
 					hasClaim = true;
+
+					//Cannot have two claims with different values now
+					claimToRemove = uc;
+
 					Console.WriteLine(uc);
-					claimToRemove = uc; //Cannot have two claims with different values now
 				} else {
 					Console.WriteLine($"claim: [({uc.Type}),({uc.Value})] != userClaim[({claimToAdd.Type}),({claimToAdd.Value})]");
 				}
@@ -62,6 +69,7 @@ namespace Claims_With_IdentityUser.Controllers {
 				await ClaimRemoval(model);
 
 				await userManager.AddClaimAsync(user, new Claim(model.claimName, model.claimValue));
+				await signinManage.RefreshSignInAsync(await userManager.FindByNameAsync(model.username));
 				TempData["Message"] = "Claim ADDED!";
 			} else {
 				TempData["Message"] = "You need to be signed in to set claims";

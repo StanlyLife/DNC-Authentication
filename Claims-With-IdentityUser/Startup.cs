@@ -68,7 +68,7 @@ namespace Claims_With_IdentityUser {
 				});
 
 				options.AddPolicy("myWebsiteAgePolicy", MyPolicyBuilder => {
-					MyPolicyBuilder.RequireClaim("Age", "21");
+					MyPolicyBuilder.RequireClaim("age", "21");
 				});
 			});
 
