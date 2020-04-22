@@ -21,5 +21,14 @@ namespace Claims_With_IdentityUser.Models {
 
 		[NotMapped]
 		public int counter { get; set; }
+
+		[NotMapped]
+		public string username { get; set; }
+
+		[NotMapped]
+		public string claimName { get; set; }
+
+		[NotMapped]
+		public string claimValue { get; set; }
 	}
 }

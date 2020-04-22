@@ -28,54 +28,9 @@ namespace Claims_With_IdentityUser.Controllers {
 		}
 
 		public async Task<IActionResult> IndexAsync() {
-			if (User.Identity.Name != null) {
-				await getUsersAndClaims();
-			}
+			await getUsersAndClaims();
 
 			return View(model);
-		}
-
-		public async Task<IActionResult> LoginAsync(ContainerModel model) {
-			if (string.IsNullOrWhiteSpace(model.Lrm.password) || string.IsNullOrWhiteSpace(model.Lrm.username)) {
-				TempData["Message"] = "Enter username and password";
-				return RedirectToAction("index", "home");
-			}
-
-			var user = await userManager.FindByNameAsync(model.Lrm.username);
-
-			if (user != null) {
-				if (signInManager.IsSignedIn(User)) {
-					Console.WriteLine($"{User.Identity.Name} is already signed in");
-				} else {
-					Console.WriteLine("User is not signed in, starting signin...");
-				}
-
-				var result = await signInManager.PasswordSignInAsync(user, model.Lrm.password, true, false);
-
-				/*-------------------------------*/
-				if (User.Identity.IsAuthenticated) {
-					Console.WriteLine("is logged in");
-				} else {
-					Console.WriteLine("is not logged in");
-				}
-
-				foreach (var c in HttpContext.User.Claims) {
-					Console.WriteLine($"Claim: {c}");
-				}
-
-				/*-------------------*/
-
-				Console.WriteLine(result.Succeeded);
-				if (result.Succeeded) {
-					TempData["message"] = "login successfull";
-				} else {
-					TempData["message"] = "login failed";
-				}
-			} else {
-				TempData["Message"] = "no user found";
-			}
-
-			return RedirectToAction("index");
 		}
 
 		private async Task<ContainerModel> getUsersAndClaims() {

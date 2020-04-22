@@ -19,7 +19,7 @@
 
 <div class="log-reg">
 
-	<form asp-action="Login" method="post">
+	<form asp-controller="login" asp-action="Login" method="post">
 		<h4>login</h4>
 
 		<div class="label-input">
@@ -48,39 +48,55 @@
 
 <div class="add-claims">
 	<h4>add claims</h4>
-	<form asp-action="" method="post">
+	<form asp-controller="Permissions" asp-action="SetClaim" method="post">
 		<div class="label-input">
 			<label>Username</label>
-			<input type="text" value="" />
+			<input asp-for="username" type="text" value="" />
 		</div>
 		<div class="label-input">
 			<label>Claim-name/type</label>
-			<input type="text" value="" />
+			<input asp-for="claimName" type="text" value="" />
 		</div>
-		<button>add claims</button>
+		<div class="label-input">
+			<label>Claim-Value</label>
+			<input asp-for="claimValue" type="text" value="" />
+		</div>
+		<button OnClientClick="return false;">add claims</button>
 	</form>
 </div>
 
 <div class="remove-claims">
 	<h4>remove claims</h4>
-	<form asp-action="" method="post">
+	<form asp-controller="Permissions" asp-action="RemoveClaim" method="post">
 		<div class="label-input">
 			<label>Username</label>
-			<input type="text" value="" />
+			<input asp-for="username" type="text" value="" />
 		</div>
 		<div class="label-input">
 			<label>Claim-name/type</label>
-			<input type="text" value="" />
+			<input asp-for="claimName" type="text" value="" />
 		</div>
-		<button>remove claims</button>
+		<div class="label-input">
+			<label>Claim-Value</label>
+			<input asp-for="claimValue" type="text" value="" />
+		</div>
+		<button OnClientClick="return false;">add claims</button>
 	</form>
 </div>
 
 <div class="users-claims">
 	<table>
-		<tr>
-			<td class="username">username</td>
-			<td>foreach claims</td>
-		</tr>
+		@{
+			int counter = 0;
+		}
+		@foreach (var u in Model.Ucm.username) {
+			<tr>
+				<td class="username">@u</td>
+				@foreach (var claim in Model.Ucm.claimsList.ToList()[counter]) {
+					<td>@claim</td>
+				}
+			</tr>
+			counter++;
+		}
 	</table>
 </div>

@@ -49,20 +49,18 @@ namespace Claims_With_IdentityUser {
 				options.AccessDeniedPath = "/home/denied";
 				options.LoginPath = "/home/loginRequired";
 			});
-			//services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-			//	.AddCookie(options => {
-			//		options.Cookie.IsEssential = true;
-			//		options.Cookie.HttpOnly = true;
-			//		options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-			//		options.Cookie.SameSite = SameSiteMode.None;
-			//		options.Cookie.Name = "my.authentication.cookie";
-			//		options.AccessDeniedPath = "/home/authenticationdenied";
-			//	});
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options => {
+					options.Cookie.IsEssential = true;
+					options.Cookie.HttpOnly = true;
+					options.Cookie.Name = "my.authentication.cookie";
+					options.AccessDeniedPath = "/home/authenticationdenied";
+				});
 
-			services.AddAuthentication("myCookieAuthentication").AddCookie("myCookieAuthentication", config => {
-				config.Cookie.Name = "Life.Cookie";
-				config.LoginPath = "/Login/login"; /*unauthorized login*/
-			});
+			//services.AddAuthentication("myCookieAuthentication").AddCookie("myCookieAuthentication", config => {
+			//	config.Cookie.Name = "Life.Cookie";
+			//	config.LoginPath = "/Login/login"; /*unauthorized login*/
+			//});
 
 			services.AddAuthorization(options => {
 				options.AddPolicy("myWebsiteGenderPolicy", MyPolicyBuilder => {

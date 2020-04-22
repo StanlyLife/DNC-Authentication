@@ -17,7 +17,7 @@ namespace Claims_With_IdentityUser.Controllers {
 			this.userManager = userManager;
 		}
 
-		public async Task<IActionResult> IndexAsync(ContainerModel model) {
+		public async Task<IActionResult> LoginAsync(ContainerModel model) {
 			if (string.IsNullOrWhiteSpace(model.Lrm.password) || string.IsNullOrWhiteSpace(model.Lrm.username)) {
 				TempData["Message"] = "Enter username and password";
 				return RedirectToAction("index", "home");
@@ -26,10 +26,19 @@ namespace Claims_With_IdentityUser.Controllers {
 			var user = await userManager.FindByNameAsync(model.Lrm.username);
 
 			if (user != null) {
-				//if(signInManager.IsSignedIn())
+				if (signInManager.IsSignedIn(User)) {
+					Console.WriteLine($"{User.Identity.Name} is already signed in");
+				} else {
+					Console.WriteLine("User is not signed in, starting signin...");
+				}
 
 				var result = await signInManager.PasswordSignInAsync(user, model.Lrm.password, true, false);
+
+				Console.WriteLine(result.Succeeded);
 				if (result.Succeeded) {
+					foreach (var claim in User.Claims) {
+						Console.WriteLine($"User: {model.Lrm.username} Claim: {claim}");
+					}
 					TempData["message"] = "login successfull";
 				} else {
 					TempData["message"] = "login failed";
