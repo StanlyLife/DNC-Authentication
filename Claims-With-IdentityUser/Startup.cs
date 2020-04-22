@@ -67,7 +67,8 @@ namespace Claims_With_IdentityUser {
 
 			services.AddAuthorization(options => {
 				options.AddPolicy("myWebsiteGenderPolicy", MyPolicyBuilder => {
-					MyPolicyBuilder.RequireClaim(ClaimTypes.Gender);
+					//MyPolicyBuilder.RequireClaim(ClaimTypes.Gender);
+					MyPolicyBuilder.Requirements.Add(new MyPolicyRequirements.GenderRequirement("male"));
 				});
 
 				options.AddPolicy("myWebsiteAgePolicy", MyPolicyBuilder => {
@@ -84,6 +85,7 @@ namespace Claims_With_IdentityUser {
 			});
 			/**/
 			services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+			services.AddSingleton<IAuthorizationHandler, GenderHandler>();
 			services.AddControllersWithViews();
 		}
 

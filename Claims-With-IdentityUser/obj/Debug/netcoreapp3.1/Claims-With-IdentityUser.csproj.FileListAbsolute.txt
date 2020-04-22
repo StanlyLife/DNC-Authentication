@@ -147,3 +147,4 @@ C:\Users\stian\source\repos\Authentication\Claims-With-IdentityUser\obj\Debug\ne
 C:\Users\stian\source\repos\Authentication\Claims-With-IdentityUser\obj\Debug\netcoreapp3.1\Razor\Views\Home\authenticationdenied.cshtml.g.cs
 C:\Users\stian\source\repos\Authentication\Claims-With-IdentityUser\obj\Debug\netcoreapp3.1\Razor\Views\Home\denied.cshtml.g.cs
 C:\Users\stian\source\repos\Authentication\Claims-With-IdentityUser\obj\Debug\netcoreapp3.1\Razor\Views\Home\loginRequired.cshtml.g.cs
+C:\Users\stian\source\repos\Authentication\Claims-With-IdentityUser\obj\Debug\netcoreapp3.1\Claims-With-IdentityUser.csprojAssemblyReference.cache

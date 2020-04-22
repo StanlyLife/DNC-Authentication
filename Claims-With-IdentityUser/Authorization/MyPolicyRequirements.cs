@@ -18,6 +18,14 @@ namespace Claims_With_IdentityUser.Authorization {
 			}
 		}
 
+		public class GenderRequirement : MyPolicyRequirements {
+			public string gender;
+
+			public GenderRequirement(string gender) {
+				this.gender = gender;
+			}
+		}
+
 		/**/
 
 		/**/
@@ -30,7 +38,23 @@ namespace Claims_With_IdentityUser.Authorization {
 					return Task.CompletedTask;
 				}
 
-				if (context.User.HasClaim(c => c.Type == "age" && Int32.Parse(c.Value) > 20)) {
+				if (context.User.HasClaim(c => c.Type == "age" && Int32.Parse(c.Value) > requirement.MinimumAge)) {
+					context.Succeed(requirement);
+				}
+
+				return Task.CompletedTask;
+			}
+		}
+
+		public class GenderHandler : AuthorizationHandler<GenderRequirement> {
+
+			protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+														   GenderRequirement requirement) {
+				if (!context.User.HasClaim(c => c.Type == "gender")) {
+					return Task.CompletedTask;
+				}
+
+				if (context.User.HasClaim(c => c.Type == "gender" && c.Value == requirement.gender)) {
 					context.Succeed(requirement);
 				}
 
