@@ -1,4 +1,5 @@
-# DNC-Authentication
+# Dot Net Core - Authentication
+# This repository is beeing worked on, and currently displays faulty information
 
 
 ## ROLES VS CLAIMS VS POLICY
