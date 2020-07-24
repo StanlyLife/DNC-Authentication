@@ -4,6 +4,7 @@
 
 ## ROLES VS CLAIMS VS POLICY
 
+
 ### ROLES
 ![img](https://imagizer.imageshack.com/img924/1177/Mo6RmT.png)
 - A user is either in it or not
